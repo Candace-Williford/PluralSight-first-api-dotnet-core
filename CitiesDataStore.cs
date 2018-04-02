@@ -39,12 +39,12 @@ namespace CityInfo.API
                     PointsOfInterest = new List<PointOfInterestDto>()
                     {
                         new PointOfInterestDto() {
-                            Id = 1,
+                            Id = 3,
                             Name = "Cathedral of Our Lady",
                             Description = "A Gothic style cathedral, conceived by architects Jan and Pieter Appelmans."
                         },
                         new PointOfInterestDto() {
-                            Id = 2,
+                            Id = 4,
                             Name = "Antwerp Central Station",
                             Description = "The finest example of railway archicture in Belgium."
                         }
@@ -58,12 +58,12 @@ namespace CityInfo.API
                     PointsOfInterest = new List<PointOfInterestDto>()
                     {
                         new PointOfInterestDto() {
-                            Id = 1,
+                            Id = 5,
                             Name = "Eiffel Tower",
                             Description = "A wrought iron lattice tower on the Champ de Mars, named after engineer Gustave Eiffel."
                         },
                         new PointOfInterestDto() {
-                            Id = 2,
+                            Id = 6,
                             Name = "The Louvre",
                             Description = "The world's largest museum."
                         }

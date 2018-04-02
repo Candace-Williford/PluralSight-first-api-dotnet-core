@@ -19,9 +19,12 @@ namespace CityInfo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .AddMvcOptions(o => o.OutputFormatters.Add(
-                    new XmlDataContractSerializerOutputFormatter()
-                ));
+                .AddMvcOptions(
+                    options => {
+                        options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                        options.InputFormatters.Add(new XmlSerializerInputFormatter());
+                    }
+                );
                 // this code allows you to override the serialization options of .NET Core
                 // .AddJsonOptions(o => {
                 //     if (o.SerializerSettings.ContractResolver != null)
