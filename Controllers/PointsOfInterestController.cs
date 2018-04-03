@@ -3,20 +3,47 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CityInfo.API.Models;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.Extensions.Logging;
+using System;
+using CityInfo.API.Services;
 
 namespace CityInfo.API.Controllers
 {
     [Route("api/cities")]
-    public class PointsOfInterest : Controller
+    public class PointsOfInterestController : Controller
     {
+        private ILogger<PointsOfInterestController> _logger;
+        private IMailService _mailService;
+
+        //this is called constructor injection
+        //we use injection to separate out the configuration of anything being injected so that the controller doesn't have to worry about it.
+        public PointsOfInterestController(ILogger<PointsOfInterestController> logger,
+            IMailService mailService)
+        {
+            _logger = logger;
+            _mailService = mailService;
+        }
+
         [HttpGet("{cityId}/pointsofinterest")]
         public IActionResult GetPointsOfInterest(int cityId)
         {
-            var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
-            if(city == null)
-                return NotFound();
+            try
+            {
+                var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
+                if(city == null)
+                {
+                    _logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
+                    return NotFound();
+                }
 
-            return Ok(city.PointsOfInterest);
+                return Ok(city.PointsOfInterest);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Exception while getting points of interest for city with id {cityId}.", ex);
+                return StatusCode(500, "A problem happened while handling your request.");
+            }
+            
         }
 
         [HttpGet("{cityId}/pointsofinterest/{id}", Name = "GetPointOfInterest")]
@@ -152,6 +179,9 @@ namespace CityInfo.API.Controllers
                 return NotFound();
 
             city.PointsOfInterest.Remove(pointOfInterestFromStore);
+
+            _mailService.Send("Point of interest deleted.",
+                $"Point of interest {pointOfInterestFromStore.Name} with Id {pointOfInterestFromStore.Id} was deleted.");
 
             return NoContent();
         }
