@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "7c6491b782d123313f51c5d8be7df63ef9431974"
+    "signature": "25fb18453a44404695daacf2e29d417aef0e73bd"
   },
   "compilationOptions": {
     "defines": [
@@ -24,7 +24,10 @@
       "first-api-dotnet-core/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.5",
-          "Microsoft.NETCore.App": "2.0.0"
+          "Microsoft.NETCore.App": "2.0.0",
+          "NLog": "4.5.0-rc06",
+          "NLog.Web.AspNetCore": "4.5.0-rc3",
+          "System.Diagnostics.TraceSource": "4.0.0-rc2-24027"
         },
         "runtime": {
           "first-api-dotnet-core.dll": {}
@@ -2365,6 +2368,41 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
+      "NLog/4.5.0-rc06": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.dll": {}
+        }
+      },
+      "NLog.Extensions.Logging/1.0.0-rtm-rc7": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "2.0.0",
+          "NLog": "4.5.0-rc06"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NLog.Extensions.Logging.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.Extensions.Logging.dll": {}
+        }
+      },
+      "NLog.Web.AspNetCore/4.5.0-rc3": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.1",
+          "Microsoft.AspNetCore.Http": "2.0.1",
+          "Microsoft.AspNetCore.Http.Extensions": "2.0.1",
+          "Microsoft.AspNetCore.Routing.Abstractions": "2.0.1",
+          "NLog.Extensions.Logging": "1.0.0-rtm-rc7"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NLog.Web.AspNetCore.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.Web.AspNetCore.dll": {}
+        }
+      },
       "Remotion.Linq/2.1.1": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -2816,6 +2854,27 @@
           "Microsoft.NETCore.Platforms": "2.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Diagnostics.TraceSource/4.0.0-rc2-24027": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0"
+        },
+        "runtimeTargets": {
+          "runtime/unix/lib/_._": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtime/win7/lib/_._": {
+            "rid": "win7",
+            "assetType": "runtime"
+          }
         }
       },
       "System.Diagnostics.Tracing/4.3.0": {
@@ -5126,6 +5185,27 @@
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
     },
+    "NLog/4.5.0-rc06": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RcEE+hNHTRNmk3XHWMEE1bd/CtyI/RNYBiXDxgl8oo8uIH48TMGCuY7KvBmrZUajgeRN+ep28O2oBpdv4EzRuQ==",
+      "path": "nlog/4.5.0-rc06",
+      "hashPath": "nlog.4.5.0-rc06.nupkg.sha512"
+    },
+    "NLog.Extensions.Logging/1.0.0-rtm-rc7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-faT5NH1kg6v4Vbspb8mm/DpSu1bk/YUrJWf/hq5Z/IsUZMW3mgGNzLUjurSzDZYT5UsClR983pcXvppmwsdwKA==",
+      "path": "nlog.extensions.logging/1.0.0-rtm-rc7",
+      "hashPath": "nlog.extensions.logging.1.0.0-rtm-rc7.nupkg.sha512"
+    },
+    "NLog.Web.AspNetCore/4.5.0-rc3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GRo0ShtJKfKpcADLqbdT12nLvoli/AzDrAZLLE+YXzu2iBXbY8N/Z0vAfeXLDCPMETveBmDENk+JhSNu24hwxQ==",
+      "path": "nlog.web.aspnetcore/4.5.0-rc3",
+      "hashPath": "nlog.web.aspnetcore.4.5.0-rc3.nupkg.sha512"
+    },
     "Remotion.Linq/2.1.1": {
       "type": "package",
       "serviceable": true,
@@ -5461,6 +5541,13 @@
       "sha512": "sha512-UUvkJfSYJMM6x527dJg2VyWPSRqIVB0Z7dbjHst1zmwTXz5CcXSYJFWRpuigfbO1Lf7yfZiIaEUesfnl/g5EyA==",
       "path": "system.diagnostics.tools/4.3.0",
       "hashPath": "system.diagnostics.tools.4.3.0.nupkg.sha512"
+    },
+    "System.Diagnostics.TraceSource/4.0.0-rc2-24027": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qv6TcsC9l4V79sDIiMJzRmQbIXywMHWpHAnkoVhR+lDxeQp9+rutN+rVL/8vvRD5/a4FiX9SV971K4FaKHBv3w==",
+      "path": "system.diagnostics.tracesource/4.0.0-rc2-24027",
+      "hashPath": "system.diagnostics.tracesource.4.0.0-rc2-24027.nupkg.sha512"
     },
     "System.Diagnostics.Tracing/4.3.0": {
       "type": "package",
